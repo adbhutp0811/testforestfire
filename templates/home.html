@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FWI Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand-mark">F</span>
+                FWI Prediction
+            </div>
+            <div class="live-pill">Live Forecast</div>
+        </header>
+
+        <main class="dashboard">
+            <section class="hero">
+                <div class="eyebrow">Fire Weather Index</div>
+                <h1>Assess fire danger with confidence.</h1>
+                <p class="subtitle">
+                    Use weather and fuel condition inputs to estimate wildfire risk through a clean predictive dashboard built for quick decisions.
+                </p>
+
+                <ul class="feature-list">
+                    <li>Temperature</li>
+                    <li>Humidity</li>
+                    <li>Wind Speed</li>
+                    <li>Rainfall</li>
+                    <li>FFMC</li>
+                    <li>DMC</li>
+                    <li>ISI</li>
+                    <li>Region</li>
+                </ul>
+            </section>
+
+            <aside class="form-panel">
+                <div class="panel-head">
+                    <h2>Prediction Input</h2>
+                    <p>Enter the environmental parameters below.</p>
+                </div>
+
+                <form action="{{ url_for('predict_datapoint') }}" method="post">
+                    <div class="fields-grid">
+                        <div class="field">
+                            <label for="Temperature">Temperature</label>
+                            <input type="text" id="Temperature" name="Temperature" placeholder="e.g. 28.2" required />
+                        </div>
+                        <div class="field">
+                            <label for="RH">Relative Humidity</label>
+                            <input type="text" id="RH" name="RH" placeholder="e.g. 42" required />
+                        </div>
+                        <div class="field">
+                            <label for="Ws">Wind Speed</label>
+                            <input type="text" id="Ws" name="Ws" placeholder="e.g. 12" required />
+                        </div>
+                        <div class="field">
+                            <label for="Rain">Rainfall</label>
+                            <input type="text" id="Rain" name="Rain" placeholder="e.g. 0.5" required />
+                        </div>
+                        <div class="field">
+                            <label for="FFMC">FFMC</label>
+                            <input type="text" id="FFMC" name="FFMC" placeholder="e.g. 85" required />
+                        </div>
+                        <div class="field">
+                            <label for="DMC">DMC</label>
+                            <input type="text" id="DMC" name="DMC" placeholder="e.g. 120" required />
+                        </div>
+                        <div class="field">
+                            <label for="ISI">ISI</label>
+                            <input type="text" id="ISI" name="ISI" placeholder="e.g. 8" required />
+                        </div>
+                        <div class="field">
+                            <label for="Classes">Classes</label>
+                            <input type="text" id="Classes" name="Classes" placeholder="e.g. 2" required />
+                        </div>
+                        <div class="field full">
+                            <label for="Region">Region</label>
+                            <input type="text" id="Region" name="Region" placeholder="e.g. north" required />
+                        </div>
+                    </div>
+
+                    <div class="submit-row">
+                        <button type="submit" class="submit-btn">Predict</button>
+                        <div class="result-box">{{ result or 'Awaiting input' }}</div>
+                    </div>
+                </form>
+            </aside>
+        </main>
+    </div>
+</body>
+</html>
